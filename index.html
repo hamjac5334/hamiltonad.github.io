@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hamilton A&D</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy-dark: #233957;
+      --navy-page: #65656E;
+      --navy-panel: #2b3544;
+      --navy-alt: #2d3748;
+      --text-main: #ffffff;
+      --text-muted: #cdd3dc;
+      --accent: #f6b663;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--navy-page);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+      padding: 0 40px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(35, 57, 87, 0.98);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .header h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
+    nav ul li + li { margin-left: 8px; }
+    nav ul li a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    nav ul li a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+    .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 6px; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; margin: 3px 0; }
+
+    main { padding-top: 72px; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 620px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.55);
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+      right: 0;
+      padding: 0 40px;
+      max-width: 860px;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      line-height: 1.12;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      max-width: 680px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 28px;
+      max-width: 560px;
+      line-height: 1.75;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 14px 34px;
+      border-radius: 3px;
+      background: var(--accent);
+      color: #1a1a1a;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    }
+    .hero-btn:hover {
+      background: #f9c37f;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+
+    /* ── Stats bar ── */
+    .stats-bar {
+      background: #2d2f33;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 36px 24px;
+    }
+
+    .stats-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      text-align: center;
+    }
+
+    .stat-item {
+      position: relative;
+      padding: 0 20px;
+    }
+
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 46px;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── Shared section styles ── */
+    .content-section {
+      padding: 96px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: #65656E;
+    }
+
+    /* Capabilities override */
+    .content-section.capabilities-section {
+    background: #2d2f33;
+    }
+
+    .content-section:nth-of-type(even) { background: rgba(0,0,0,0.1); }
+
+    .section-inner {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 500;
+      margin-bottom: 14px;
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 0 56px;
+      line-height: 1.8;
+    }
+
+    /* ── Service cards ── */
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 40px 36px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .service-item:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(246,182,99,0.25);
+    }
+
+    .service-item .service-icon {
+      font-size: 28px;
+      color: var(--accent);
+      opacity: 0.9;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-item h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .service-item p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* ── Image + text split ── */
+    .split-section {
+      padding: 0;
+      background: #2d2f33;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 460px;
+    }
+
+    .split-img {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .split-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.7);
+    }
+
+
+    .split-content {
+      padding: 72px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(0,0,0,0.1);
+    }
+
+    .split-content .section-kicker { margin-bottom: 12px; }
+    .split-content .section-heading { font-size: 42px; margin-bottom: 20px; }
+
+    /* ── Process steps ── */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .process-step {
+      padding: 40px 36px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      transition: background 0.25s;
+    }
+
+    .process-step:hover { background: rgba(255,255,255,0.06); }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.9;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .process-step h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .process-step p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .process-step .step-arrow {
+      position: absolute;
+      right: 36px;
+      top: 40px;
+      color: var(--accent);
+      opacity: 0.25;
+      font-size: 18px;
+    }
+
+    /* ── Capabilities ── */
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .cap-group {
+      padding: 40px 40px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.25s;
+    }
+
+    .cap-group:hover { background: rgba(255,255,255,0.06); }
+
+    .cap-group h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-main);
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .cap-group h3 i {
+      font-size: 18px;
+      color: var(--accent);
+      opacity: 0.85;
+      width: 18px;
+    }
+
+    .cap-group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cap-group ul li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.75;
+    }
+
+    .cap-group ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      opacity: 0.5;
+      font-weight: 300;
+    }
+
+    /* ── Why us ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 60px;
+    }
+
+    .why-item {
+      border-left: 2px solid rgba(246,182,99,0.35);
+      padding-left: 24px;
+    }
+
+    .why-item h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+    }
+
+    .why-item h4 i {
+      font-size: 18px;
+      color: var(--accent);
+      opacity: 0.85;
+      width: 16px;
+    }
+
+    .why-item p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* ── CTA band ── */
+    .cta-band {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 100px 24px;
+    }
+
+    .cta-band img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.3);
+    }
+
+    .cta-band-content {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .cta-band h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 500;
+      margin-bottom: 18px;
+      line-height: 1.15;
+    }
+
+    .cta-band p {
+      font-size: 17px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 36px;
+      line-height: 1.75;
+    }
+
+    .cta-band .hero-btn { margin: 0 8px; }
+
+    .cta-btn-outline {
+      display: inline-block;
+      padding: 14px 34px;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.45);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      margin: 0 8px;
+    }
+
+    .cta-btn-outline:hover {
+      border-color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background-color: var(--navy-dark);
+      color: var(--text-muted);
+      text-align: center;
+      padding: 36px 20px 30px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    footer h3 { color: var(--text-main); font-size: 18px; margin-bottom: 14px; font-weight: 400; }
+    footer p { margin: 6px 0; font-size: 14px; }
+    footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .header { padding: 0 18px; }
+      .header h4 { font-size: 18px; }
+
+      nav ul#navMenu {
+        display: none;
+        position: fixed;
+        top: 72px;
+        right: 15px;
+        width: 200px;
+        flex-direction: column;
+        background: rgba(35,57,87,0.98);
+        padding: 14px;
+        border-radius: 10px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+      }
+      nav ul#navMenu.active { display: flex; }
+      nav ul#navMenu li + li { margin-left: 0; margin-top: 8px; }
+      nav ul#navMenu li a { display: block; }
+      .hamburger { display: flex; }
+
+      .hero img { height: 520px; }
+      .hero-title { font-size: 36px; }
+
+      .stats-inner { grid-template-columns: 1fr; gap: 24px; }
+      .stat-item::after { display: none; }
+
+      .services-list { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .capabilities-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; gap: 28px; }
+
+      .split-section { grid-template-columns: 1fr; }
+      .split-img { height: 260px; }
+      .split-content { padding: 48px 28px; }
+
+      .section-heading { font-size: 34px; }
+      .cta-band h2 { font-size: 32px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <h4>Hamilton A&amp;D</h4>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html" onclick="closeMenu()">Services</a></li>
+        <li><a href="process.html" onclick="closeMenu()">Process</a></li>
+        <li><a href="about.html" onclick="closeMenu()">About</a></li>
+        <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <img src="Morocco.jpg" alt="Hamilton Analytics and Development" />
+      <div class="hero-content">
+        <div class="hero-kicker">Hamilton Analytics &amp; Development</div>
+        <h1 class="hero-title">Helping Small Businesses Transform Software &amp; Data Into Revenue</h1>
+        <p class="hero-subtitle">Designing high-performing websites, mobile applications, dashboards, and automation systems that increase leads, improve efficiency, and drive measurable growth.</p>
+        <a href="contact.html" class="hero-btn">Schedule a Free Consultation</a>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Client Satisfaction</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Core Service Areas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">End-to-End</div>
+          <div class="stat-label">Project Delivery</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Services -->
+    <section class="content-section">
+      <div class="section-inner">
+        <div class="section-kicker">What We Do</div>
+        <h2 class="section-heading">Services That Drive Measurable Results</h2>
+        <p class="section-subtitle">Focused, practical solutions for growing businesses that need clarity, efficiency, and digital presence.</p>
+
+        <div class="services-list">
+          <div class="service-item">
+            <i class="fas fa-chart-line service-icon"></i>
+            <h4>Custom Development</h4>
+            <p>Modern, conversion-focused websites and mobile applications built for speed, usability, and lead generation.</p>
+          </div>
+          <div class="service-item">
+            <i class="fas fa-database service-icon"></i>
+            <h4>Analytics</h4>
+            <p>Custom dashboards, KPI tracking, and predictive insights that give you clear visibility into performance and smarter data-driven decision-making.</p>
+          </div>
+          <div class="service-item">
+            <i class="fas fa-lightbulb service-icon"></i>
+            <h4>Strategy &amp; Automation</h4>
+            <p>Implementation of automation, systems improvement, and digital strategy to reduce costs and increase output.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Split Image + About Teaser -->
+    <section class="split-section">
+      <div class="split-img">
+        <img src="Morocco.jpg" alt="Our approach" />
+      </div>
+      <div class="split-content">
+        <div class="section-kicker">Our Philosophy</div>
+        <h2 class="section-heading">Built Around Your Business Goals</h2>
+        <p style="font-size:16px; font-weight:300; color:var(--text-muted); line-height:1.85; margin-bottom:28px;">
+          We don't offer one-size-fits-all packages. Every engagement begins with understanding your specific goals, constraints, and definition of success — then we build toward it with precision.
+        </p>
+        <a href="about.html" class="hero-btn" style="align-self:flex-start;">Learn About Us</a>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="content-section">
+      <div class="section-inner">
+        <div class="section-kicker">How It Works</div>
+        <h2 class="section-heading">Our Procedure</h2>
+        <p class="section-subtitle">Clear communication. Structured execution. Measurable outcomes.</p>
+
+        <div class="process-steps">
+          <div class="process-step">
+            <span class="step-num">01 — Discovery</span>
+            <h4>Understand</h4>
+            <p>We identify your goals, challenges, and key metrics for success in a structured kickoff process.</p>
+            <i class="fas fa-arrow-right step-arrow"></i>
+          </div>
+          <div class="process-step">
+            <span class="step-num">02 — Build</span>
+            <h4>Execute</h4>
+            <p>Design and implement a solution aligned with your objectives, with regular check-ins throughout.</p>
+            <i class="fas fa-arrow-right step-arrow"></i>
+          </div>
+          <div class="process-step">
+            <span class="step-num">03 — Optimize</span>
+            <h4>Refine</h4>
+            <p>Continuously improve based on real data and performance insights to maximize your return.</p>
+          </div>
+        </div>
+        <div style="margin-top: 40px;">
+          <a href="process.html" class="hero-btn">View Full Process</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section class="content-section capabilities-section">
+      <div class="section-inner">
+        <div class="section-kicker">Full Scope</div>
+        <h2 class="section-heading">Comprehensive Capabilities</h2>
+        <p class="section-subtitle">End-to-end expertise across technology, analytics, and strategy.</p>
+
+        <div class="capabilities-grid">
+          <div class="cap-group">
+            <h3><i class="fas fa-laptop-code"></i> Technology Solutions</h3>
+            <ul>
+              <li>Web &amp; application development</li>
+              <li>API integration &amp; connectivity</li>
+              <li>Database design &amp; optimization</li>
+              <li>Cloud migration &amp; infrastructure</li>
+            </ul>
+          </div>
+          <div class="cap-group">
+            <h3><i class="fas fa-database"></i> Business Intelligence</h3>
+            <ul>
+              <li>Executive dashboards and KPI tracking</li>
+              <li>Data warehouse design &amp; implementation</li>
+              <li>Automated reporting &amp; visualization</li>
+              <li>Performance analytics &amp; forecasting</li>
+            </ul>
+          </div>
+          <div class="cap-group">
+            <h3><i class="fas fa-cogs"></i> Process Optimization</h3>
+            <ul>
+              <li>Workflow analysis &amp; improvement</li>
+              <li>Operational efficiency assessments</li>
+              <li>Cost reduction &amp; ROI analysis</li>
+              <li>Change management support</li>
+            </ul>
+          </div>
+          <div class="cap-group">
+            <h3><i class="fas fa-users"></i> Advisory Services</h3>
+            <ul>
+              <li>Technology strategy &amp; roadmaps</li>
+              <li>Vendor selection &amp; evaluation</li>
+              <li>Team training &amp; capability building</li>
+              <li>Project management &amp; oversight</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="content-section">
+      <div class="section-inner">
+        <div class="section-kicker">Why Hamilton A&amp;D</div>
+        <h2 class="section-heading">Why Partner With Us</h2>
+        <p class="section-subtitle">Proven approach combining technical expertise with practical execution for organizations serious about results.</p>
+
+        <div class="why-grid">
+          <div class="why-item">
+            <h4><i class="fas fa-bullseye"></i> Results-Focused</h4>
+            <p>Every engagement targets measurable outcomes aligned with your strategic priorities and business objectives.</p>
+          </div>
+          <div class="why-item">
+            <h4><i class="fas fa-handshake"></i> True Partnership</h4>
+            <p>Collaborative approach embedding with your team to ensure solutions fit your processes, culture, and constraints.</p>
+          </div>
+          <div class="why-item">
+            <h4><i class="fas fa-rocket"></i> Agile Execution</h4>
+            <p>Iterative delivery with continuous feedback ensures adaptability to changing priorities and market conditions.</p>
+          </div>
+          <div class="why-item">
+            <h4><i class="fas fa-shield-alt"></i> Deep Expertise</h4>
+            <p>Cross-discipline experience spanning analytics, engineering, and strategy for end-to-end implementation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section class="cta-band">
+      <img src="Morocco.jpg" alt="" aria-hidden="true" />
+      <div class="cta-band-content">
+        <h2>Ready to Build Something That Works?</h2>
+        <p>Schedule a free, no-obligation consultation and discover what Hamilton A&amp;D can do for your business.</p>
+        <a href="contact.html" class="hero-btn">Get In Touch</a>
+        <a href="process.html" class="cta-btn-outline">See Our Process</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h3>Ready to Improve Your Digital Presence?</h3>
+    <p>Schedule a free consultation to discuss your goals and next steps.</p>
+    <p>Phone: <a href="tel:+18438477056">+1 (843) 847-7056</a></p>
+    <p>Email: <a href="mailto:jack.hamilton@comcast.net">jack.hamilton@comcast.net</a></p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('active');
+    }
+    function closeMenu() {
+      document.getElementById('navMenu').classList.remove('active');
+    }
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('navMenu');
+      if (!document.querySelector('.header').contains(e.target) && menu.classList.contains('active')) {
+        menu.classList.remove('active');
+      }
+    });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) document.getElementById('navMenu').classList.remove('active');
+    });
+  </script>
+</body>
+</html>
