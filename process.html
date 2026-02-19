@@ -95,12 +95,19 @@ nav ul li a:hover {
   padding: 6px;
 }
 
+.header-right {
+      display: flex;
+      align-items:center;
+      margin-left: auto;
+}
+
 .hamburger span {
   width: 24px;
   height: 2px;
   background: #fff;
   margin: 3px 0;
 }
+
 
 /* ── Main ── */
 main {
@@ -303,18 +310,23 @@ footer a:hover {
 
 <header class="header">
   <h4>Hamilton A&amp;D</h4>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+
+  <div class="header-right">
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html" onclick="closeMenu()">Services</a></li>
+        <li><a href="process.html" onclick="closeMenu()">Process</a></li>
+        <li><a href="about.html" onclick="closeMenu()">About</a></li>
+        <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
-  <nav>
-    <ul id="navMenu">
-      <li><a href="index.html" onclick="closeMenu()">Services</a></li>
-      <li><a href="process.html" onclick="closeMenu()">Process</a></li>
-      <li><a href="about.html" onclick="closeMenu()">About</a></li>
-      <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+    
+  </header>
 
 <main>
   <section class="process-section">

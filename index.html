@@ -46,6 +46,12 @@
       box-shadow: 0 1px 0 rgba(255,255,255,0.08);
     }
 
+    .header-right {
+      display: flex;
+      align-items:center;
+      margin-left: auto;
+    }
+
     .header h4 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 22px;
@@ -603,10 +609,9 @@
 
 <body>
   <header class="header">
-    <h4>Hamilton A&amp;D</h4>
-    <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
+  <h4>Hamilton A&amp;D</h4>
+
+  <div class="header-right">
     <nav>
       <ul id="navMenu">
         <li><a href="index.html" onclick="closeMenu()">Services</a></li>
@@ -615,6 +620,12 @@
         <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
       </ul>
     </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
   </header>
 
   <main>

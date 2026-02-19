@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 
 <style>
-
 :root {
   --navy-dark: #233957;
   --navy-page: #65656E;
@@ -27,51 +26,54 @@ body {
   color: var(--text-main);
 }
 
-/* ── Header (unchanged) ── */
+/* ── Header ── */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 72px;
-  padding: 0 40px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: rgba(35, 57, 87, 0.98);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-}
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+      padding: 0 40px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(35, 57, 87, 0.98);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+    }
 
-.header h4 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin: 0;
-}
+    .header-right {
+      display: flex;
+      align-items:center;
+      margin-left: auto;
+    }
 
-nav ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+    .header h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0;
+      font-weight: 500;
+    }
 
-nav ul li + li { margin-left: 10px; }
+    nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
+    nav ul li + li { margin-left: 8px; }
+    nav ul li a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    nav ul li a:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
-nav ul li a {
-  text-decoration: none;
-  font-size: 14px;
-  color: rgba(255,255,255,0.8);
-  padding: 6px 14px;
-  border-radius: 999px;
-}
+    .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 6px; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; margin: 3px 0; }
 
-nav ul li a:hover {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-}
-
+/* main */
 main { padding-top: 72px; }
 
 /* ── Intro Section ── */
@@ -165,7 +167,7 @@ main { padding-top: 72px; }
   margin-top: 8px;
 }
 
-/* ── Footer (restored to original dark style) ── */
+/* ── Footer ── */
 footer {
   background-color: var(--navy-dark);
   color: var(--text-muted);
@@ -190,29 +192,68 @@ footer a {
 
 footer a:hover { color: #fff; }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .about-section { flex-direction: column !important; }
-  .about-image { min-height: 280px; }
-  .about-inner { padding: 50px 30px; }
-  .about-intro h2 { font-size: 32px; }
-}
+/* ── Responsive ── */
+    @media (max-width: 768px) {
+      .header { padding: 0 18px; }
+      .header h4 { font-size: 18px; }
 
+      nav ul#navMenu {
+        display: none;
+        position: fixed;
+        top: 72px;
+        right: 15px;
+        width: 200px;
+        flex-direction: column;
+        background: rgba(35,57,87,0.98);
+        padding: 14px;
+        border-radius: 10px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+      }
+      nav ul#navMenu.active { display: flex; }
+      nav ul#navMenu li + li { margin-left: 0; margin-top: 8px; }
+      nav ul#navMenu li a { display: block; }
+      .hamburger { display: flex; }
+
+      .hero img { height: 520px; }
+      .hero-title { font-size: 36px; }
+
+      .stats-inner { grid-template-columns: 1fr; gap: 24px; }
+      .stat-item::after { display: none; }
+
+      .services-list { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .capabilities-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; gap: 28px; }
+
+      .split-section { grid-template-columns: 1fr; }
+      .split-img { height: 260px; }
+      .split-content { padding: 48px 28px; }
+
+      .section-heading { font-size: 34px; }
+      .cta-band h2 { font-size: 32px; }
+    }
 </style>
 </head>
 
 <body>
 
 <header class="header">
-  <h4>Hamilton A&D</h4>
-  <nav>
-    <ul>
-      <li><a href="index.html">Services</a></li>
-      <li><a href="process.html">Process</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+  <h4>Hamilton A&amp;D</h4>
+
+  <div class="header-right">
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html" onclick="closeMenu()">Services</a></li>
+        <li><a href="process.html" onclick="closeMenu()">Process</a></li>
+        <li><a href="about.html" onclick="closeMenu()">About</a></li>
+        <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </header>
 
 <main>
@@ -225,7 +266,6 @@ footer a:hover { color: #fff; }
 </section>
 
 <!-- 1 -->
-
 <div class="about-section">
   <div class="about-image" style="background-image: url('Morocco.jpg');"></div>
   <div class="about-content">
@@ -307,6 +347,26 @@ footer a:hover { color: #fff; }
   <p>Phone: <a href="tel:+18438477056">+1 (843) 847-7056</a></p>
   <p>Email: <a href="mailto:jack.hamilton@comcast.net">jack.hamilton@comcast.net</a></p>
 </footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navMenu').classList.toggle('active');
+  }
+  function closeMenu() {
+    document.getElementById('navMenu').classList.remove('active');
+  }
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('navMenu');
+    if (!document.querySelector('.header').contains(e.target) && menu.classList.contains('active')) {
+      menu.classList.remove('active');
+    }
+  });
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      document.getElementById('navMenu').classList.remove('active');
+    }
+  });
+</script>
 
 </body>
 </html>
