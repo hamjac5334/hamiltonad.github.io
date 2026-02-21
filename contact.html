@@ -1,9 +1,10 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hamilton A&D – Contact</title>
+  <meta name="description" content="Schedule a free consultation with Hamilton A&D. We respond within 24 hours."/>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -61,6 +62,7 @@
       margin: 0;
       font-weight: 500;
     }
+    .header.header-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.25); }
 
     nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
     nav ul li + li { margin-left: 8px; }
@@ -290,14 +292,41 @@
     footer {
       background-color: var(--navy-dark);
       color: var(--text-muted);
-      text-align: center;
-      padding: 36px 20px 30px;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-    footer h3 { color: var(--text-main); font-size: 18px; margin-bottom: 14px; font-weight: 400; }
-    footer p { margin: 6px 0; font-size: 14px; }
-    footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
-    footer a:hover { color: #fff; }
+    .footer-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 24px 44px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 48px 32px;
+      text-align: left;
+    }
+    .footer-brand h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin: 0 0 12px;
+    }
+    .footer-brand p { font-size: 14px; line-height: 1.7; color: var(--text-muted); margin: 0 0 20px; max-width: 260px; }
+    .footer-brand .hero-btn { font-size: 12px; padding: 10px 24px; display: inline-block; background: var(--accent); color: #1a1a1a; font-weight: 500; text-decoration: none; border-radius: 3px; }
+    .footer-brand .hero-btn:hover { color: #1a1a1a; background: #f9c37f; }
+    .footer-col h4 { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-contact p { font-size: 14px; margin: 0 0 8px; color: var(--text-muted); }
+    .footer-contact p a { color: rgba(255,255,255,0.9); text-decoration: none; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 20px 24px; text-align: center; }
+    .footer-bottom-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+    .footer-bottom p { margin: 0; font-size: 13px; color: rgba(255,255,255,0.5); }
+    .footer-bottom a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; }
+    .footer-bottom a:hover { color: #fff; }
 
     /* ── Responsive ── */
     @media (max-width: 700px) {
@@ -309,7 +338,7 @@
         position: fixed;
         top: 72px;
         right: 15px;
-        width: 200px;
+        width: 220px;
         flex-direction: column;
         background: rgba(35,57,87,0.98);
         padding: 14px;
@@ -324,6 +353,9 @@
       .form-panel { padding: 32px 24px 28px; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
       .contact-intro h2 { font-size: 32px; }
+      .footer-main { grid-template-columns: 1fr; gap: 32px; text-align: center; padding: 40px 20px 32px; }
+      .footer-brand p { max-width: none; }
+      .footer-bottom-inner { flex-direction: column; justify-content: center; }
     }
   </style>
 </head>
@@ -355,7 +387,8 @@
       <div class="contact-intro">
         <div class="hero-kicker">Contact Us</div>
         <h2>Get in Touch</h2>
-        <p>We'd love to hear about your project. Reach out to schedule a consultation or ask any questions — we'll get back to you promptly.</p>
+        <p>We'd love to hear about your project. Reach out to schedule a consultation or ask any questions — we typically respond within one business day.</p>
+        <p style="margin-top:10px; font-size:14px; color: var(--accent);">Free consultation • No obligation • Response within 24 hours</p>
       </div>
 
       <div class="form-panel">
@@ -414,15 +447,46 @@
   </main>
 
   <footer>
-    <h3>Ready to Improve Your Digital Presence?</h3>
-    <p>Schedule a free consultation to discuss your goals and next steps.</p>
-    <p>Phone: <a href="tel:+18438477056">+1 (843) 847-7056</a></p>
-    <p>Email: <a href="mailto:jack.hamilton@comcast.net">jack.hamilton@comcast.net</a></p>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h3>Hamilton A&amp;D</h3>
+        <p>Web development, analytics, and automation for small businesses. Based in Charleston, SC.</p>
+        <a href="contact.html" class="hero-btn">Get Free Consultation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#services">Custom Development</a></li>
+          <li><a href="index.html#services">Analytics &amp; Dashboards</a></li>
+          <li><a href="index.html#services">Strategy &amp; Automation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="process.html">Our Process</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact footer-col">
+        <h4>Contact</h4>
+        <p><a href="tel:+18438477056">+1 (843) 847-7056</a></p>
+        <p><a href="mailto:jack.hamilton@comcast.net">jack.hamilton@comcast.net</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>&copy; <span id="footer-year"></span> Hamilton Analytics &amp; Development. All rights reserved.</p>
+        <p>Charleston, South Carolina</p>
+      </div>
+    </div>
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="assets/js/animations.js"></script>
 
   <script>
     function toggleMenu() {
@@ -440,6 +504,7 @@
     window.addEventListener('resize', function() {
       if (window.innerWidth > 700) document.getElementById('navMenu').classList.remove('active');
     });
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>

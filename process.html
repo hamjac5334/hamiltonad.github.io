@@ -38,7 +38,7 @@ body {
   flex-direction: column;
 }
 
-/* ── Header (UNCHANGED) ── */
+/* ── Header ── */
 .header {
   display: flex;
   justify-content: space-between;
@@ -54,6 +54,12 @@ body {
   box-shadow: 0 1px 0 rgba(255,255,255,0.08);
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
 .header h4 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px;
@@ -62,16 +68,10 @@ body {
   margin: 0;
   font-weight: 500;
 }
+.header.header-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.25); }
 
-nav ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
+nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
 nav ul li + li { margin-left: 8px; }
-
 nav ul li a {
   text-decoration: none;
   font-size: 14px;
@@ -79,35 +79,17 @@ nav ul li a {
   color: rgba(255,255,255,0.75);
   padding: 6px 14px;
   border-radius: 999px;
-  transition: background 0.2s;
-  letter-spacing: 0.02em;
+  transition: all 0.2s;
 }
+nav ul li a:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
-nav ul li a:hover {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-}
+.hamburger { display: none; flex-direction: column; cursor: pointer; padding: 6px; }
+.hamburger span { width: 24px; height: 2px; background: #fff; margin: 3px 0; }
 
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  padding: 6px;
-}
-
-.header-right {
-      display: flex;
-      align-items:center;
-      margin-left: auto;
-}
-
-.hamburger span {
-  width: 24px;
-  height: 2px;
-  background: #fff;
-  margin: 3px 0;
-}
-
+.animate-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+.flow-step { transition: transform 0.25s ease, background 0.2s ease; }
+.flow-step:hover { transform: translateY(-3px) translateX(4px); }
 
 /* ── Main ── */
 main {
@@ -228,35 +210,47 @@ main {
   line-height: 1.65;
 }
 
-/* ── Footer (UNCHANGED) ── */
+/* ── Footer ── */
 footer {
   background-color: var(--navy-dark);
   color: var(--text-muted);
-  text-align: center;
-  padding: 36px 20px 30px;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
-
-footer h3 {
+.footer-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 24px 44px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px 32px;
+  text-align: left;
+}
+.footer-brand h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--text-main);
-  font-size: 18px;
-  margin-bottom: 14px;
-  font-weight: 400;
+  margin: 0 0 12px;
 }
-
-footer p {
-  margin: 6px 0;
-  font-size: 14px;
-}
-
-footer a {
-  color: rgba(255,255,255,0.85);
-  text-decoration: none;
-}
-
-footer a:hover {
-  color: #fff;
-}
+.footer-brand p { font-size: 14px; line-height: 1.7; color: var(--text-muted); margin: 0 0 20px; max-width: 260px; }
+.footer-brand .hero-btn { font-size: 12px; padding: 10px 24px; display: inline-block; background: var(--accent); color: #1a1a1a; font-weight: 500; text-decoration: none; border-radius: 3px; }
+.footer-brand .hero-btn:hover { color: #1a1a1a; background: #f9c37f; }
+.footer-col h4 { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; }
+.footer-col ul li a:hover { color: #fff; }
+.footer-contact p { font-size: 14px; margin: 0 0 8px; color: var(--text-muted); }
+.footer-contact p a { color: rgba(255,255,255,0.9); text-decoration: none; }
+.footer-contact .hero-btn { margin-top: 16px; font-size: 12px; padding: 10px 24px; display: inline-block; background: var(--accent); color: #1a1a1a; font-weight: 500; text-decoration: none; border-radius: 3px; }
+.footer-contact .hero-btn:hover { color: #1a1a1a; background: #f9c37f; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 20px 24px; text-align: center; }
+.footer-bottom-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.footer-bottom p { margin: 0; font-size: 13px; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; }
+.footer-bottom a:hover { color: #fff; }
 
 /* ── Responsive ── */
 @media (max-width: 700px) {
@@ -274,7 +268,7 @@ footer a:hover {
     position: fixed;
     top: 72px;
     right: 15px;
-    width: 200px;
+    width: 220px;
     flex-direction: column;
     background: rgba(35,57,87,0.98);
     padding: 14px;
@@ -302,6 +296,10 @@ footer a:hover {
   .process-intro h2 {
     font-size: 30px;
   }
+
+  .footer-main { grid-template-columns: 1fr; gap: 32px; text-align: center; padding: 40px 20px 32px; }
+  .footer-brand p { max-width: none; }
+  .footer-bottom-inner { flex-direction: column; justify-content: center; }
 }
 </style>
 </head>
@@ -331,7 +329,7 @@ footer a:hover {
 <main>
   <section class="process-section">
 
-    <div class="process-intro">
+    <div class="process-intro animate-on-scroll">
       <div class="hero-kicker">Our Process</div>
       <h2>Structured Approach to Delivering Results</h2>
       <p>
@@ -341,38 +339,37 @@ footer a:hover {
     </div>
 
     <div class="flowchart">
-
-      <div class="flow-step">
+      <div class="flow-step animate-on-scroll">
         <div class="step-number">01</div>
         <h3>Initial Consultation</h3>
         <p>Discuss goals, vision, timeline, budget, and site conditions.</p>
       </div>
 
-      <div class="flow-step">
+      <div class="flow-step animate-on-scroll">
         <div class="step-number">02</div>
         <h3>Concept Development</h3>
         <p>Preliminary sketches, layouts, and structured design direction.</p>
       </div>
 
-      <div class="flow-step">
+      <div class="flow-step animate-on-scroll">
         <div class="step-number">03</div>
         <h3>Design & Documentation</h3>
         <p>Detailed plans, elevations, technical drawings, and material selections.</p>
       </div>
 
-      <div class="flow-step">
+      <div class="flow-step animate-on-scroll">
         <div class="step-number">04</div>
         <h3>Review & Refinement</h3>
         <p>Collaborative feedback and iterative improvements.</p>
       </div>
 
-      <div class="flow-step">
+      <div class="flow-step animate-on-scroll">
         <div class="step-number">05</div>
         <h3>Final Approval & Delivery</h3>
         <p>Stamped drawings, finalized documentation, and structured handoff.</p>
       </div>
 
-      <div class="flow-step">
+      <div class="flow-step animate-on-scroll">
         <div class="step-number">06</div>
         <h3>Project Support</h3>
         <p>Ongoing collaboration and communication during development.</p>
@@ -384,10 +381,40 @@ footer a:hover {
 </main>
 
 <footer>
-  <h3>Ready to Improve Your Digital Presence?</h3>
-  <p>Schedule a free consultation to discuss your goals and next steps.</p>
-  <p>Phone: <a href="tel:+18438477056">+1 (843) 847-7056</a></p>
-  <p>Email: <a href="mailto:jack.hamilton@comcast.net">jack.hamilton@comcast.net</a></p>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <h3>Hamilton A&amp;D</h3>
+      <p>Web development, analytics, and automation for small businesses. Based in Charleston, SC.</p>
+      <a href="contact.html" class="hero-btn">Get Free Consultation</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="index.html#services">Custom Development</a></li>
+        <li><a href="index.html#services">Analytics &amp; Dashboards</a></li>
+        <li><a href="index.html#services">Strategy &amp; Automation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact footer-col">
+      <h4>Contact</h4>
+        <p><a href="tel:+18438477056">+1 (843) 847-7056</a></p>
+        <p><a href="mailto:jack.hamilton@comcast.net">jack.hamilton@comcast.net</a></p>
+      </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p>&copy; <span id="footer-year"></span> Hamilton Analytics &amp; Development. All rights reserved.</p>
+      <p>Charleston, South Carolina</p>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -408,7 +435,9 @@ window.addEventListener('resize', function() {
     document.getElementById('navMenu').classList.remove('active');
   }
 });
+document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
+<script src="assets/js/animations.js"></script>
 
 </body>
 </html>

@@ -56,6 +56,7 @@ body {
       margin: 0;
       font-weight: 500;
     }
+    .header.header-scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.25); }
 
     nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
     nav ul li + li { margin-left: 8px; }
@@ -72,6 +73,9 @@ body {
 
     .hamburger { display: none; flex-direction: column; cursor: pointer; padding: 6px; }
     .hamburger span { width: 24px; height: 2px; background: #fff; margin: 3px 0; }
+
+    .animate-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
 /* main */
 main { padding-top: 72px; }
@@ -163,7 +167,7 @@ main { padding-top: 72px; }
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #1a1a1a;
+  background: #FFFFFF;
   margin-top: 8px;
 }
 
@@ -171,38 +175,118 @@ main { padding-top: 72px; }
 footer {
   background-color: var(--navy-dark);
   color: var(--text-muted);
-  text-align: center;
-  padding: 36px 20px 30px;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
-
-footer h3 {
+.footer-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 24px 44px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 48px 32px;
+  text-align: left;
+}
+.footer-brand h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--text-main);
-  font-size: 18px;
-  margin-bottom: 14px;
-  font-weight: 400;
+  margin: 0 0 12px;
 }
-
-footer p { margin: 6px 0; font-size: 14px; }
-
-footer a {
-  color: rgba(255,255,255,0.85);
+.footer-brand p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0 0 20px;
+  max-width: 260px;
+}
+.footer-brand .hero-btn {
+  font-size: 12px;
+  padding: 10px 24px;
+  background: var(--accent);
+  color: #1a1a1a;
+  font-weight: 500;
   text-decoration: none;
+  border-radius: 3px;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
 }
-
-footer a:hover { color: #fff; }
+.footer-brand .hero-btn:hover { color: #1a1a1a; background: #f9c37f; transform: translateY(-1px); }
+.footer-col h4 {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 18px;
+}
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 14px;
+}
+.footer-col ul li a:hover { color: #fff; }
+.footer-contact p { font-size: 14px; margin: 0 0 8px; color: var(--text-muted); }
+.footer-contact p a { color: rgba(255,255,255,0.9); text-decoration: none; }
+.footer-contact p a:hover { color: #fff; }
+.footer-contact .hero-btn {
+  margin-top: 16px;
+  font-size: 12px;
+  padding: 10px 24px;
+  display: inline-block;
+  background: var(--accent);
+  color: #1a1a1a;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 3px;
+}
+.footer-contact .hero-btn:hover { color: #1a1a1a; background: #f9c37f; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 20px 24px;
+  text-align: center;
+}
+.footer-bottom-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.footer-bottom p { margin: 0; font-size: 13px; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; }
+.footer-bottom a:hover { color: #fff; }
 
 /* ── Responsive ── */
     @media (max-width: 768px) {
       .header { padding: 0 18px; }
       .header h4 { font-size: 18px; }
 
+      /* Stack About Sections */
+      .about-section {
+        flex-direction: column !important;
+      }
+
+      .about-section:nth-of-type(even) {
+        flex-direction: column !important;
+      }
+
+.about-image {
+  min-height: 260px;
+}
+
       nav ul#navMenu {
         display: none;
         position: fixed;
         top: 72px;
         right: 15px;
-        width: 200px;
+        width: 220px;
         flex-direction: column;
         background: rgba(35,57,87,0.98);
         padding: 14px;
@@ -231,6 +315,9 @@ footer a:hover { color: #fff; }
 
       .section-heading { font-size: 34px; }
       .cta-band h2 { font-size: 32px; }
+      .footer-main { grid-template-columns: 1fr; gap: 32px; text-align: center; padding: 40px 20px 32px; }
+      .footer-brand p { max-width: none; }
+      .footer-bottom-inner { flex-direction: column; justify-content: center; }
     }
 </style>
 </head>
@@ -258,7 +345,7 @@ footer a:hover { color: #fff; }
 
 <main>
 
-<section class="about-intro">
+<section class="about-intro animate-on-scroll">
   <h2>About Hamilton A&amp;D</h2>
   <p>
     We combine precision, structure, and thoughtful design to create refined digital experiences for growing businesses.
@@ -266,8 +353,8 @@ footer a:hover { color: #fff; }
 </section>
 
 <!-- 1 -->
-<div class="about-section">
-  <div class="about-image" style="background-image: url('Morocco.jpg');"></div>
+<div class="about-section animate-on-scroll">
+  <div class="about-image" style="background-image: url('alex-smith-AblhYTa5ats-unsplash.jpg');"></div>
   <div class="about-content">
     <div class="about-inner">
       <div class="section-label">Charleston Based Development</div>
@@ -280,8 +367,8 @@ footer a:hover { color: #fff; }
 </div>
 
 <!-- 2 -->
-<div class="about-section">
-  <div class="about-image" style="background-image: url('Morocco.jpg');"></div>
+<div class="about-section animate-on-scroll">
+  <div class="about-image" style="background-image: url('paul-pastourmatzis-r0J9sGBWFOc-unsplash.jpg');"></div>
   <div class="about-content">
     <div class="about-inner">
       <div class="section-label">Mission</div>
@@ -294,8 +381,8 @@ footer a:hover { color: #fff; }
 </div>
 
 <!-- 3 -->
-<div class="about-section">
-  <div class="about-image" style="background-image: url('Morocco.jpg');"></div>
+<div class="about-section animate-on-scroll">
+  <div class="about-image" style="background-image: url('rowan-heuvel-PgSxHidgJHQ-unsplash.jpg');"></div>
   <div class="about-content">
     <div class="about-inner">
       <div class="section-label">Who We Are</div>
@@ -308,8 +395,8 @@ footer a:hover { color: #fff; }
 </div>
 
 <!-- 4 -->
-<div class="about-section">
-  <div class="about-image" style="background-image: url('Morocco.jpg');"></div>
+<div class="about-section animate-on-scroll">
+  <div class="about-image" style="background-image: url('tom-lorber-NSaluZbGc6Y-unsplash.jpg');"></div>
   <div class="about-content">
     <div class="about-inner">
       <div class="section-label">What Makes Us Different</div>
@@ -342,10 +429,40 @@ footer a:hover { color: #fff; }
 </main>
 
 <footer>
-  <h3>Ready to Improve Your Digital Presence?</h3>
-  <p>Schedule a free consultation to discuss your goals and next steps.</p>
-  <p>Phone: <a href="tel:+18438477056">+1 (843) 847-7056</a></p>
-  <p>Email: <a href="mailto:jack.hamilton@comcast.net">jack.hamilton@comcast.net</a></p>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <h3>Hamilton A&amp;D</h3>
+      <p>Web development, analytics, and automation for small businesses. Based in Charleston, SC.</p>
+      <a href="contact.html" class="hero-btn">Get Free Consultation</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="index.html#services">Custom Development</a></li>
+        <li><a href="index.html#services">Analytics &amp; Dashboards</a></li>
+        <li><a href="index.html#services">Strategy &amp; Automation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact footer-col">
+      <h4>Contact</h4>
+        <p><a href="tel:+18438477056">+1 (843) 847-7056</a></p>
+        <p><a href="mailto:jack.hamilton@comcast.net">jack.hamilton@comcast.net</a></p>
+      </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p>&copy; <span id="footer-year"></span> Hamilton Analytics &amp; Development. All rights reserved.</p>
+      <p>Charleston, South Carolina</p>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -360,14 +477,15 @@ footer a:hover { color: #fff; }
     if (!document.querySelector('.header').contains(e.target) && menu.classList.contains('active')) {
       menu.classList.remove('active');
     }
-  });
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-      document.getElementById('navMenu').classList.remove('active');
-    }
-  });
+});
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    document.getElementById('navMenu').classList.remove('active');
+  }
+});
+document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
+<script src="assets/js/animations.js"></script>
 
 </body>
 </html>
-
