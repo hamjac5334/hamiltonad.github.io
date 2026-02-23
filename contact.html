@@ -394,21 +394,31 @@
       <div class="form-panel">
         <h3>Send a Message</h3>
 
-        <form action="#" method="POST">
+        <!-- FORM UPDATED FOR WEB3FORMS -->
+        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Required Web3Forms settings -->
+          <input type="hidden" name="access_key" value="addd5911-9dfe-4bc3-916c-786682daa43b">
+          <input type="hidden" name="subject" value="New message from Hamilton A&amp;D contact form">
+          <input type="hidden" name="from_name" value="Hamilton A&amp;D Website">
+
+
+          <!-- Honeypot field for spam bots -->
+          <input type="checkbox" name="botcheck" style="display:none;">
+
           <div class="form-row">
             <div class="form-group">
               <label for="first-name">First Name</label>
-              <input type="text" id="first-name" name="first_name" placeholder="John"/>
+              <input type="text" id="first-name" name="first_name" placeholder="John" required/>
             </div>
             <div class="form-group">
               <label for="last-name">Last Name</label>
-              <input type="text" id="last-name" name="last_name" placeholder="Smith"/>
+              <input type="text" id="last-name" name="last_name" placeholder="Smith" required/>
             </div>
           </div>
 
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="john@example.com"/>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required/>
           </div>
 
           <div class="form-group">
@@ -430,7 +440,7 @@
 
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your project, timeline, or any questions you have…"></textarea>
+            <textarea id="message" name="message" placeholder="Tell us about your project, timeline, or any questions you have…" required></textarea>
           </div>
 
           <div class="form-actions">
@@ -457,8 +467,10 @@
         <h4>Services</h4>
         <ul>
           <li><a href="index.html#services">Custom Development</a></li>
-          <li><a href="index.html#services">Analytics &amp; Dashboards</a></li>
-          <li><a href="index.html#services">Strategy &amp; Automation</a></li>
+          <li><a href="index.html#process">Procedure</a></li>
+          <li><a href="index.html#capabilities">Capabilities</a></li>
+          <li><a href="index.html#why">Why Us</a></li>
+          
         </ul>
       </div>
       <div class="footer-col">
@@ -466,13 +478,16 @@
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="process.html">Our Process</a></li>
+          <li><a href="index.html#map">Location</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-contact footer-col">
         <h4>Contact</h4>
-        <p><a href="tel:+18438477056">+1 (843) 847-7056</a></p>
+        <p><a href="contact.html">Contact Form</a></p>
         <p><a href="mailto:hamiltondevs@gmail.com">hamiltondevs@gmail.com</a></p>
+        <p><a href="tel:+18438477056">+1 (843) 847-7056</a></p>
+        </p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -506,5 +521,41 @@
     });
     document.getElementById('footer-year').textContent = new Date().getFullYear();
   </script>
+
+  <script>
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        form.innerHTML = `
+          <div style="text-align:center; padding:40px 20px;">
+            <h3 style="color:#233957; font-family:'Cormorant Garamond', serif;">
+              Thank you for your response
+            </h3>
+            <p style="color:#555; margin-top:10px;">
+              We’ll be in touch within one business day.
+            </p>
+          </div>
+        `;
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Submission failed. Please check your connection.");
+    }
+  });
+</script>
 </body>
 </html>
